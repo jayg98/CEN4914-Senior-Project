@@ -1,8 +1,10 @@
 package com.example.demo.user;
 
+import com.example.demo.loginToken.LoginToken;
+
 public class UserService {
 	
-	public String firstLogin(String useremail, String password, UserSchema userSchema) {
+	public LoginToken firstLogin(String useremail, String password, UserSchema userSchema) {
 		
 	}
 	

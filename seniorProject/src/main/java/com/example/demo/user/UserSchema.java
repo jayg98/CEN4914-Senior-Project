@@ -3,28 +3,49 @@ package com.example.demo.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.exception.fakeDbException;
+
 public class UserSchema {
 	
 	private List <User> users;
+	private int max = 0;
 	
 	public UserSchema() {
 		users = new ArrayList();
 	}
 	
 	public User save(User user) {
+		String useremail = user.getUseremail();
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUseremail().equals(useremail)) {
+				throw new fakeDbException("user already existed");
+			}
+		}
 		
+		users.add(user);
+		return user;
 	}
+
 	
 	public User findByUseremail(String useremail) {
+		User foundUser = null;
+		for( int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUseremail().equals(useremail))
+				foundUser = users.get(i);
+		}
 		
-	}
-	
-	public User findById(int id) {
-		
+		return foundUser;
 	}
 	
 	public int getNextId() {
-		//get next unique id for new account
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUserId() > max) {
+				max = users.get(i).getUserId();
+			}
+		}
+		
+		max = max + 1;
+		return max;
 	}
 	
 }
