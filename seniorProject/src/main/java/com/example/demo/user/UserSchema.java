@@ -2,8 +2,7 @@ package com.example.demo.user;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.demo.exception.fakeDbException;
+import com.example.demo.exceptions.*;
 
 public class UserSchema {
 	
@@ -18,7 +17,7 @@ public class UserSchema {
 		String useremail = user.getUseremail();
 		for(int i = 0; i < users.size(); i++) {
 			if(users.get(i).getUseremail().equals(useremail)) {
-				throw new fakeDbException("user already existed");
+				throw new FakeDbException("user already existed");
 			}
 		}
 		
