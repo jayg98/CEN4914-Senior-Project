@@ -3,6 +3,7 @@ package com.example.demo.LoginToken;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class LoginTokenSchema{
 	
@@ -17,15 +18,22 @@ public class LoginTokenSchema{
 	
 	public LoginToken update(LoginToken token){
 		
-		token.expirationDate = LocalDateTime.now();
-		token.getTokenString();
+		LoginToken retrievedToken = null;
+		
+		for (int i = 0; i < loginTokens.size(); i++){
+			if(loginTokens.get(i).getUserId() == token.getUserId()){
+				retrievedToken = loginToken.get(i);
+			}
+		}
+		retrievedToken.expirationDate = token.expirationDate;
+		retrievedToken.tokenString = token.getTokenString();
 		
 		return token;
 	}
 	
 	public LoginToken findByUserId(int userId){
 		
-		LoginToken foundToken;
+		LoginToken foundToken = null;
 		
 		for(int i = 0; i < loginTokens.size(); i++){
 			if(loginTokens.get(i).getUserId() == userId){
