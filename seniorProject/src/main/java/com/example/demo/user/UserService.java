@@ -1,11 +1,41 @@
 package com.example.demo.user;
 
-import com.example.demo.loginToken.LoginToken;
+import com.example.demo.LoginToken.LoginToken;
+import java.security.SecureRandom;
+
 
 public class UserService {
+	UserSchema userSchema = new UserSchema();
 	
+	public UserSchema() {
+		userSchema = new UserSchema();
+	}
 	public LoginToken firstLogin(String useremail, String password, UserSchema userSchema) {
+		this.useremail = useremail;
+		this.password = password;
 		
+		if(findByUseremail(useremail) == null || password != getPassword() ) {
+			throw new userInfoNotMatching("E-mail or password incorrect. Try again.")
+			
+		}
+			
+		else {
+			userId = getUserId();
+			loginToken = getTokenString();
+			
+			protected static SecureRandom random = new SecureRandom();
+			public synchronized String generateToken(String userId) {
+                long longToken = Math.abs( random.nextLong() );
+                String random = Long.toString( longToken, 16 );
+                newTokenString = (userId + ":" + random);
+                return newTokenString;
+                }
+			
+			this.loginToken = setTokenString(newTokenString);
+			
+}
+			
+			}	
 	}
 	
 	public boolean secondLogin(
