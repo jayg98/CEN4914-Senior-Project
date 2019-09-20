@@ -30,13 +30,13 @@ public class LoginTokenSchema{
 		
 		for (int i = 0; i < loginTokens.size(); i++){
 			if(loginTokens.get(i).getUserId() == token.getUserId()){
-				retrievedToken = loginToken.get(i);
+				retrievedToken = loginTokens.get(i);
 			}
 		}
-		retrievedToken.expirationDate = token.expirationDate;
-		retrievedToken.tokenString = token.getTokenString();
+		retrievedToken.setExpirationDate(token.getExpirationDate());
+		retrievedToken.setTokenString(token.getTokenString());
 		
-		return token;
+		return retrievedToken;
 	}
 	
 	public LoginToken findByUserId(int userId){
