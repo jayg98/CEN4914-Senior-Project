@@ -31,7 +31,8 @@ public class UserService {
                 return newTokenString;
                 }
 			
-			this.loginToken = setTokenString(newTokenString);
+			string firstLoginToken = setTokenString(newTokenString);
+			string loginToken = firstLoginToken;
 			
 }
 			
