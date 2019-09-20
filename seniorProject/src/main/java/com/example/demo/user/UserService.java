@@ -14,14 +14,15 @@ public class UserService {
 		this.useremail = useremail;
 		this.password = password;
 		
-		if(findByUseremail(useremail) == null || password != getPassword() ) {
+		if(findByUseremail(useremail) == null || password.equals(getPassword()) ) {
 			throw new userInfoNotMatching("E-mail or password incorrect. Try again.")
 			
 		}
 			
 		else {
 			userId = getUserId();
-			loginToken = getTokenString();
+			loginToken = findByUserId();
+			
 			
 			protected static SecureRandom random = new SecureRandom();
 			public synchronized String generateToken(String userId) {
@@ -33,6 +34,8 @@ public class UserService {
 			
 			string firstLoginToken = setTokenString(newTokenString);
 			string loginToken = firstLoginToken;
+			LoginToken loginToken.update();
+			
 			
 }
 			
