@@ -10,7 +10,8 @@ public class CustomeMongoDbConfig {
 
 	static public MongoTemplate mongoTemplate() {
 		
-		MongoClientURI uri = new MongoClientURI("mongodb://yuetchany:Saito2277@ds023303.mlab.com:23303/algorithmic");
+		//use your own mlab url
+		MongoClientURI uri = new MongoClientURI("mongodb://<user>:<password>@ds023303.mlab.com:23303/<db>");
 		MongoDbFactory mongoDbFactory = new SimpleMongoDbFactory(uri);
 		return new MongoTemplate(mongoDbFactory);
 		
