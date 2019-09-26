@@ -13,6 +13,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void resetPasswordWithExistedUserAndPasswordResetTokenShouldReturnTrue() {
+		
 		boolean reset = false;
 		
 		UserSchema userSchema = new UserSchema();
@@ -24,6 +25,7 @@ public class UserServiceTest {
 		user.setUseremail("Saito@gmail.com");
 		user.setPassword("Saito");
 		user.setUserId(userSchema.getNextId());
+		
 		userSchema.save(user);
 		
 		PasswordResetToken passwordResetToken = new PasswordResetToken();
@@ -33,10 +35,12 @@ public class UserServiceTest {
 		reset = userService.resetPassword("Saito@gmail.com", userSchema, passwordResetTokenSchema);
 	
 		assertTrue(reset == true);
+		
 	}
 	
 	@Test
 	public void resetPasswordWithNotExistedUserShouldReturnFalse() {
+		
 		boolean reset = false;
 		
 		UserSchema userSchema = new UserSchema();
@@ -47,10 +51,12 @@ public class UserServiceTest {
 		reset = userService.resetPassword("Saito@gmail.com", userSchema, passwordResetTokenSchema);
 	
 		assertTrue(reset == false);
+		
 	}
 	
 	@Test
 	public void resetPasswordWithNotExistedPasswordResetTokenShouldReturnFalse() {
+		
 		boolean reset = false;
 		
 		UserSchema userSchema = new UserSchema();
@@ -62,11 +68,13 @@ public class UserServiceTest {
 		user.setUseremail("Saito@gmail.com");
 		user.setPassword("Saito");
 		user.setUserId(userSchema.getNextId());
+		
 		userSchema.save(user);
 		
 		reset = userService.resetPassword("Saito@gmail.com", userSchema, passwordResetTokenSchema);
 	
 		assertTrue(reset == false);
+		
 	}
 	
 
