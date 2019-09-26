@@ -25,7 +25,6 @@ public class UserSchema {
 		return user;
 	}
 
-	
 	public User findByUseremail(String useremail) {
 		User foundUser = null;
 		for( int i = 0; i < users.size(); i++) {
@@ -35,6 +34,17 @@ public class UserSchema {
 		
 		return foundUser;
 	}
+	
+	public User findByUserId(int userId) {
+		User foundUser = null;
+		for( int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUserId() == userId)
+				foundUser = users.get(i);
+		}
+		
+		return foundUser;
+	}
+	
 	
 	public int getNextId() {
 		for(int i = 0; i < users.size(); i++) {

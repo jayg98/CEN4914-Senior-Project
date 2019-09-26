@@ -1,4 +1,4 @@
-package com.example.demo.LoginToken;
+package com.example.demo.loginToken;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class LoginTokenSchema{
 		int userId = token.getUserId();
 		for(int i = 0; i < loginTokens.size(); i++) {
 			if(userId == loginTokens.get(i).getUserId()) {
-				throw new FakeDbException("user already existed");
+				throw new FakeDbException("token already existed");
 			}
 		}
 		
@@ -51,7 +51,5 @@ public class LoginTokenSchema{
 		
 		return foundToken;
 	}
-	
-	
 
 }
