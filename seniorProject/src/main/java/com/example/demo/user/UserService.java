@@ -1,32 +1,71 @@
 package com.example.demo.user;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import com.example.demo.passwordResetToken.PasswordResetToken;
+import com.example.demo.passwordResetToken.PasswordResetTokenSchema;
 import com.example.demo.loginToken.LoginToken;
 
 public class UserService {
 	
+	public UserService() {
+	}
+	
 	public LoginToken firstLogin(String useremail, String password, UserSchema userSchema) {
 		
-	}
-	
-	public boolean secondLogin(
-			String firstLoginToken, Image userImage, 
-			ImageComparer imageComparer, EmotionDetector emtionDector) {
+		return null;
 		
 	}
 	
-	public boolean register(String useremail, String password, Image userImage) {
-	
+	public boolean secondLogin() {
+		
+		return true;
 		
 	}
 	
-	public void resetPassword(String useremail, PasswordResetTokenSchema passwordResetTokenSchema) {
-		int id = userSchema.findidByUseremail(useremail);
-		Token token =  tokenSchema.findTokenById(id);
-		token.resetToken();
-		tokenSchema.save(token);
+	public boolean register(String useremail, String password) {
+		
+		return true;
+		
 	}
 	
-	public void changePassword(int id, (String tokenString, String newPassword) {
+	public boolean resetPassword(
+			String useremail, 
+			UserSchema userSchema, 
+			PasswordResetTokenSchema passwordResetTokenSchema) {
+		
+		boolean reset = false;
+		
+		User user = userSchema.findByUseremail(useremail);
+		if(user != null) {
+			int userId = user.getUserId();
+			PasswordResetToken passwordResetToken = passwordResetTokenSchema.findByUserId(userId);
+			if(passwordResetToken != null)
+				reset = true;
+			else
+				reset = false;
+		}else 
+			reset = false;
+		
+		return reset;
+		
+	}
+	
+	public boolean changePassword(
+			int userId, String tokenString, 
+			UserSchema userSchema, 
+			PasswordResetTokenSchema passwordResetTokenSchema) {
+		
+		boolean changed = false;
+		
+		PasswordResetToken passwordResetToken = passwordResetTokenSchema.findByUserId(userId);
+		if(passwordResetToken.getTokenString().equals(tokenString) && !passwordResetToken.isExpired()) {
+			changed = true;
+		}else 
+			changed = false;
+		
+		return changed;
 		
 	}
 	
