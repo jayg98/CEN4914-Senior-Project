@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.example.demo.config.CustomeMongoDbConfig;
+import com.example.demo.config.CustomMongoDbConfig;
 import com.example.demo.passwordResetToken.IPasswordResetTokenSchema;
 import com.example.demo.passwordResetToken.PasswordResetToken;
 import com.example.demo.passwordResetToken.PasswordResetTokenSchema;
