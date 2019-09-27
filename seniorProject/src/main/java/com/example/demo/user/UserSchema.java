@@ -45,7 +45,6 @@ public class UserSchema {
 		return foundUser;
 	}
 	
-	
 	public int getNextId() {
 		for(int i = 0; i < users.size(); i++) {
 			if(users.get(i).getUserId() > max) {

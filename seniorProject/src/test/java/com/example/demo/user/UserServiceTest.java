@@ -4,14 +4,29 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import com.example.demo.config.CustomeMongoDbConfig;
+import com.example.demo.passwordResetToken.IPasswordResetTokenSchema;
 import com.example.demo.passwordResetToken.PasswordResetToken;
 import com.example.demo.passwordResetToken.PasswordResetTokenSchema;
 import com.example.demo.user.UserSchema;
 import com.example.demo.user.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
+	
+	IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomeMongoDbConfig.mongoTemplate());
+	
+	@Before
+	public void setup() {
+		
+		passwordResetTokenSchema.deleteAll();
+		
+	}
 	
 	@Test
 	public void resetPasswordWithExistedUserAndPasswordResetTokenShouldReturnTrue() {
@@ -28,8 +43,6 @@ public class UserServiceTest {
 		user.setUserId(userSchema.getNextId());
 		
 		userSchema.save(user);
-		
-		PasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema();
 		
 		PasswordResetToken passwordResetToken = new PasswordResetToken();
 		passwordResetToken.setUserId(user.getUserId());
@@ -50,8 +63,6 @@ public class UserServiceTest {
 		UserService userService = new UserService();                                                        
 		
 		UserSchema userSchema = new UserSchema();
-		
-		PasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema();
 		
 		reset = userService.resetPassword("Saito@gmail.com", userSchema, passwordResetTokenSchema);
 	
@@ -75,8 +86,6 @@ public class UserServiceTest {
 		
 		userSchema.save(user);
 		
-		PasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema();
-		
 		reset = userService.resetPassword("Saito@gmail.com", userSchema, passwordResetTokenSchema);
 	
 		assertTrue(reset == false);
@@ -98,8 +107,6 @@ public class UserServiceTest {
 		user.setUserId(userSchema.getNextId());
 		
 		userSchema.save(user);
-		
-		PasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema();
 		
 		PasswordResetToken passwordResetToken = new PasswordResetToken();
 		passwordResetToken.setUserId(user.getUserId());
@@ -134,8 +141,6 @@ public class UserServiceTest {
 		user.setUserId(userSchema.getNextId());
 		
 		userSchema.save(user);
-		
-		PasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema();
 		
 		PasswordResetToken passwordResetToken = new PasswordResetToken();
 		passwordResetToken.setUserId(user.getUserId());
