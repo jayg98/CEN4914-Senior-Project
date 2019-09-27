@@ -3,6 +3,7 @@ package com.example.demo.user;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.example.demo.passwordResetToken.IPasswordResetTokenSchema;
 import com.example.demo.passwordResetToken.PasswordResetToken;
 import com.example.demo.passwordResetToken.PasswordResetTokenSchema;
 import com.example.demo.loginToken.LoginToken;
@@ -33,7 +34,7 @@ public class UserService {
 	public boolean resetPassword(
 			String useremail, 
 			UserSchema userSchema, 
-			PasswordResetTokenSchema passwordResetTokenSchema) {
+			IPasswordResetTokenSchema passwordResetTokenSchema) {
 		
 		boolean reset = false;
 		
@@ -55,7 +56,7 @@ public class UserService {
 	public boolean changePassword(
 			int userId, String tokenString, 
 			UserSchema userSchema, 
-			PasswordResetTokenSchema passwordResetTokenSchema) {
+			IPasswordResetTokenSchema passwordResetTokenSchema) {
 		
 		boolean changed = false;
 		
