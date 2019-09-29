@@ -2,7 +2,15 @@ package com.example.demo.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+
+import com.example.demo.counter.Counter;
 import com.example.demo.exceptions.*;
+import com.example.demo.infrastructure.collection.document.CounterDocument;
 
 public class UserSchema {
 	
@@ -55,5 +63,28 @@ public class UserSchema {
 		max = max + 1;
 		return max;
 	}
+	
+	
+                
+	//When you implement the actual UserSchema use the following code for getNextId(). 
+	//The rest of the schema operations should be similar to LoginTokenSchema and PasswordResetTokenSchema
+	
+	//public int getNextId() {
+		
+	//	Query query = new Query();
+  	//  	query.addCriteria(Criteria.where("_id").is("User"));
+		
+  	//  	Update update = new Update();
+ 
+  	//  	FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
+  	//    findAndModifyOptions.upsert(true);
+  	//    findAndModifyOptions.returnNew(true);
+  	  
+  	//  	Counter counter 
+  	//  	= mongoOperations.findAndModify(
+  	//  			query, update.inc("seq", 1), findAndModifyOptions, Counter.class, "UserCounter");
+    //    return counter.getSeq();
+        
+    //}
 	
 }
