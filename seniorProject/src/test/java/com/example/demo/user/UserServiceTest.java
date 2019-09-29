@@ -19,7 +19,7 @@ import com.example.demo.user.UserService;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
-	IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomeMongoDbConfig.mongoTemplate());
+	IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomMongoDbConfig.mongoTemplate());
 	
 	@Before
 	public void setup() {
