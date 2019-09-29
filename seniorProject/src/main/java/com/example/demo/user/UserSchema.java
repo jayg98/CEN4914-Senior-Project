@@ -3,14 +3,7 @@ package com.example.demo.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.mongodb.core.FindAndModifyOptions;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-
-import com.example.demo.counter.Counter;
 import com.example.demo.exceptions.*;
-import com.example.demo.infrastructure.collection.document.CounterDocument;
 
 public class UserSchema {
 	
