@@ -2,6 +2,7 @@ package com.example.demo.user;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
@@ -10,6 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.example.demo.config.CustomMongoDbConfig;
+import com.example.demo.imageComparer.AWSImageComparer;
+import com.example.demo.imageComparer.IImageComparer;
+import com.example.demo.loginToken.ILoginTokenSchema;
+import com.example.demo.loginToken.LoginTokenSchema;
 import com.example.demo.passwordResetToken.IPasswordResetTokenSchema;
 import com.example.demo.passwordResetToken.PasswordResetToken;
 import com.example.demo.passwordResetToken.PasswordResetTokenSchema;
@@ -19,15 +24,30 @@ import com.example.demo.user.UserService;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
-	IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomeMongoDbConfig.mongoTemplate());
+	private ILoginTokenSchema loginTokenSchema = new LoginTokenSchema(CustomMongoDbConfig.mongoTemplate());
+	private IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomMongoDbConfig.mongoTemplate());
 	
+	
+	//-------------------Before each test clear all schema-----------------------------------
 	@Before
 	public void setup() {
 		
+		loginTokenSchema.deleteAll();
 		passwordResetTokenSchema.deleteAll();
 		
 	}
 	
+	//--------------------first && second login unit testing----------------------------------
+	
+	
+	
+	
+	//--------------------register && activate unit testing------------------------------------
+	
+	
+
+	
+	//--------------------reset password && change password unit testing-----------------------
 	@Test
 	public void resetPasswordWithExistedUserAndPasswordResetTokenShouldReturnTrue() {
 		
