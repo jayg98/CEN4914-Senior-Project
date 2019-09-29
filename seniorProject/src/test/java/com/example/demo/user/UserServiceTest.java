@@ -25,8 +25,10 @@ import com.example.demo.user.UserService;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
+
 	private ILoginTokenSchema loginTokenSchema = new LoginTokenSchema(CustomMongoDbConfig.mongoTemplate());
 	private IPasswordResetTokenSchema passwordResetTokenSchema = new PasswordResetTokenSchema(CustomMongoDbConfig.mongoTemplate());
+
 	
 	
 	//-------------------Before each test clear all schema-----------------------------------
