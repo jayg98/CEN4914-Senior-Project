@@ -26,7 +26,7 @@ public class AWSImageComparer implements IImageComparer{
 	private static final Float similarityThreshold = 70F;
 	
 	public AWSImageComparer() {
-
+		//the key and secret are in facebook message
 		awsCreds = new BasicAWSCredentials("<key>", "<secret>");
 		rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion("us-east-1").withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 	
@@ -42,22 +42,30 @@ public class AWSImageComparer implements IImageComparer{
 	    ByteBuffer originalImageBytes=null;
 	    ByteBuffer targetImageBytes=null;
 	    
-	    //absolute path to target image
+	    //absolute path to target image, yours is different from mine, you can save ur image on deskyop as long as you use the absolute path, it will work
 		File targetImageFile = new File("C:\\Users\\yuet\\git\\seniorProjectRepo\\seniorProject\\src\\main\\resources\\static\\oimg.jpg");
 		try (InputStream inputStream = new FileInputStream(targetImageFile)) {
+			
 			targetImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
-	    }catch (Exception e) {
+	    
+		}catch (Exception e) {
+	    	
 	    	System.out.println("Failed to load source image " + targetImageReference);
 	        System.exit(1);
+	    
 	    }
 		
-		//absolute path to original image
+		//absolute path to original image, yours is different from mine, you can save ur image on deskyop as long as you use the absolute path, it will work
 		File originalImageFile = new File("C:\\Users\\yuet\\git\\seniorProjectRepo\\seniorProject\\src\\main\\resources\\static\\timg.jpg");
 		try (InputStream inputStream = new FileInputStream(originalImageFile)) {
+			
 			originalImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
+			
 	    }catch (Exception e) {
+	    	
 	    	System.out.println("Failed to load source image " + originalImageReference);
 	        System.exit(1);
+	        
 	    }
 		
 	    Image source = new Image().withBytes(originalImageBytes);
@@ -87,17 +95,25 @@ public class AWSImageComparer implements IImageComparer{
 	    ByteBuffer targetImageBytes=null;
 	    
 		try (InputStream inputStream = new FileInputStream(targetImageFile)) {
+			
 			targetImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
-	    }catch (Exception e) {
+	    
+		}catch (Exception e) {
+	    	
 	    	System.out.println("Failed to load source image " + targetImageFile.getAbsolutePath());
 	        System.exit(1);
+	        
 	    }
 		
 		try (InputStream inputStream = new FileInputStream(originalImageFile)) {
+			
 			originalImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
-	    }catch (Exception e) {
+	    
+		}catch (Exception e) {
+	    	
 	    	System.out.println("Failed to load source image " + originalImageFile.getAbsolutePath());
 	        System.exit(1);
+	        
 	    }
 		
 	    Image source = new Image().withBytes(originalImageBytes);
