@@ -2,6 +2,7 @@ package com.example.demo.user;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -37,15 +38,38 @@ public class UserServiceTest {
 		
 	}
 	
-	//--------------------first && second login unit testing----------------------------------
-	
-	
-	
-	
-	//--------------------register && activate unit testing------------------------------------
-	
+	//--------------------first && second login unit test----------------------------------
 	
 
+	
+	
+	
+	//--------------------register && activate unit test------------------------------------
+	
+	
+	
+	
+	
+	//---------------------AWSImageComparer unit test----------------------------------
+	
+	@Test
+	public void AWSImageComparerCompareTwoImageWithSamePersonShouldReturnTrueTest() throws IOException {
+		
+		boolean matched = false;
+		
+		// you can put ur image file anywhere you want but you have to use their absolute paths
+		File targetImageFile = new File("C:\\Users\\yuet\\git\\seniorProjectRepo\\seniorProject\\src\\main\\resources\\static\\oimg.jpg");
+		File originalImageFile = new File("C:\\Users\\yuet\\git\\seniorProjectRepo\\seniorProject\\src\\main\\resources\\static\\timg.jpg");
+		
+		IImageComparer imageComparer = new AWSImageComparer();
+		//compare take in two File object and compare them as images
+		matched = imageComparer.compare(targetImageFile, originalImageFile);
+		
+		assertTrue(matched == true);
+		
+	}
+	
+	
 	
 	//--------------------reset password && change password unit testing-----------------------
 	@Test
