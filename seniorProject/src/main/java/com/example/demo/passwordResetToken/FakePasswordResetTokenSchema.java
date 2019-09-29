@@ -13,6 +13,7 @@ public class FakePasswordResetTokenSchema implements IPasswordResetTokenSchema {
 		passwordResetTokens = new ArrayList();
 	}
 	
+	@Override
 	public PasswordResetToken save(PasswordResetToken token){
 		int userId = token.getUserId();
 		for(int i = 0; i < passwordResetTokens.size(); i++) {
@@ -24,6 +25,7 @@ public class FakePasswordResetTokenSchema implements IPasswordResetTokenSchema {
 		return token;
 	}
 	
+	@Override
 	public PasswordResetToken update(PasswordResetToken token){
 		
 		PasswordResetToken retrievedToken = null;
@@ -38,6 +40,7 @@ public class FakePasswordResetTokenSchema implements IPasswordResetTokenSchema {
 		return retrievedToken;
 	}
 	
+	@Override
 	public PasswordResetToken findByUserId(int userId){
 		
 		PasswordResetToken foundToken = null;
@@ -51,6 +54,7 @@ public class FakePasswordResetTokenSchema implements IPasswordResetTokenSchema {
 		return foundToken;
 	}
 	
+	@Override
 	public void deleteAll() {
 		return;
 	}

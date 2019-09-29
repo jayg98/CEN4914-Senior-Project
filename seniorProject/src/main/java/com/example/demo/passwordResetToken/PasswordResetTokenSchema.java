@@ -6,11 +6,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.example.demo.counter.Counter;
 import com.example.demo.exceptions.DbException;
 import com.example.demo.passwordResetToken.PasswordResetToken;
 
-public class PasswordResetTokenSchema implements IPasswordResetTokenSchema{
+public class PasswordResetTokenSchema implements IPasswordResetTokenSchema {
 	
     private MongoOperations mongoOperations;
     
@@ -21,6 +20,7 @@ public class PasswordResetTokenSchema implements IPasswordResetTokenSchema{
 		
 	}
 	
+	@Override
 	public PasswordResetToken save(PasswordResetToken tokenToBeSaved) {
 		
 		PasswordResetToken savedToken = null;
@@ -49,24 +49,32 @@ public class PasswordResetTokenSchema implements IPasswordResetTokenSchema{
     	
 	}
 
-	public int getNextId() {
+	@Override
+	public PasswordResetToken update(PasswordResetToken tokenToBeUpdated) {
+		
+		PasswordResetToken updatedToken = null;
 		
 		Query query = new Query();
-  	  	query.addCriteria(Criteria.where("_id").is("PasswordResetToken"));
+		query.addCriteria(Criteria
+				.where("userId").is(tokenToBeUpdated.getUserId()));
+    	
+		Update update = new Update();
+		update.set("TokenString", tokenToBeUpdated.getTokenString());
+		update.set("ExpirationDate", tokenToBeUpdated.getExpirationDate());
 		
-  	  	Update update = new Update();
- 
-  	  	FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
-  	    findAndModifyOptions.upsert(true);
-  	    findAndModifyOptions.returnNew(true);
-  	  
-  	  	Counter counter 
-  	  	= mongoOperations.findAndModify(
-  	  			query, update.inc("seq", 1), findAndModifyOptions, Counter.class, "PasswordResetTokenCounter");
-        return counter.getSeq();
-        
-    }
+		FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
+		findAndModifyOptions.upsert(true);
+		findAndModifyOptions.returnNew(true);
+		
+    	updatedToken 
+    	= mongoOperations.findAndModify(
+    			query, update, findAndModifyOptions, PasswordResetToken.class, "PasswordResetToken");
+    	
+    	return updatedToken;
+		
+	}
 	
+	@Override
 	public PasswordResetToken findByUserId(int userId) {
 		
 		PasswordResetToken foundToken = null;
@@ -82,6 +90,7 @@ public class PasswordResetTokenSchema implements IPasswordResetTokenSchema{
 		
 	}
 	
+	@Override
 	public void deleteAll() {
 		
     	mongoOperations.remove(new Query(), PasswordResetToken.class, "PasswordResetToken");
